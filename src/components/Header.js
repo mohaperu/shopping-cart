@@ -20,6 +20,14 @@ const Header = () => {
     productDispatch,
   } = CartState();
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+}
+
+  const user = localStorage.getItem('token');
+  console.log(user);
+
   return (
     <Navbar bg="dark" variant="dark" style={{ height: 80 }}>
       <Container>
@@ -87,7 +95,12 @@ const Header = () => {
               )}
             </Dropdown.Menu>
           </Dropdown>
-          <Link to="/login"><Button style={{marginLeft:10}}>Login</Button></Link>
+          
+          {user ?
+          <Button style={{ marginLeft: 10 }} onClick={handleLogout} >Logout</Button> :
+          <Link to="/login"><Button style={{ marginLeft: 10 }}>Login</Button></Link>
+          }
+
         </Nav>
       </Container>
     </Navbar>
