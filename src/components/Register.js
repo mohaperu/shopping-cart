@@ -21,7 +21,6 @@ const Register = () => {
         try {
             const url = "https://backend-shopping-cart.herokuapp.com/api/users";
             const { data: res } = await axios.post(url, data);
-            window.location="/login"
             console.log(res.message);
         } catch (error) {
             if (error.response &&
