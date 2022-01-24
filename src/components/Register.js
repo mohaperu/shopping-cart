@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
+
 
 const Register = () => {
+    let history = useHistory();
 
     const [data, setData] = useState({
         username: "",
@@ -17,11 +20,13 @@ const Register = () => {
     const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
             const url = "https://backend-shopping-cart.herokuapp.com/api/users";
             const { data: res } = await axios.post(url, data);
             console.log(res.message);
+            alert("User Created Successfully");
+            history.push("/login");
         } catch (error) {
             if (error.response &&
                 error.response.status >= 400 &&
