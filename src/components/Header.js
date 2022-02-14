@@ -23,7 +23,7 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
-}
+  }
 
   const user = localStorage.getItem('token');
   console.log(user);
@@ -84,21 +84,32 @@ const Header = () => {
                       />
                     </span>
                   ))}
-                  <Link to="/cart">
-                    <Button style={{ width: "95%", margin: "0 10px" }}>
+                  {user ?
+
+                    <Link to="/cart">
+                      <Button style={{ width: "95%", margin: "0 10px" }}>
+                        Go To Cart
+                      </Button>
+                    </Link> :
+
+                    <Link to="/login"><Button style={{ width: "95%", margin: "0 10px" }}>
                       Go To Cart
                     </Button>
-                  </Link>
+                    </Link>
+
+                  }
+
+
                 </>
               ) : (
                 <span style={{ padding: 10 }}>Cart is Empty!</span>
               )}
             </Dropdown.Menu>
           </Dropdown>
-          
+
           {user ?
-          <Button style={{ marginLeft: 10 }} onClick={handleLogout} >Logout</Button> :
-          <Link to="/login"><Button style={{ marginLeft: 10 }}>Login</Button></Link>
+            <Button style={{ marginLeft: 10 }} onClick={handleLogout} >Logout</Button> :
+            <Link to="/login"><Button style={{ marginLeft: 10 }}>Login</Button></Link>
           }
 
         </Nav>

@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Image, ListGroup, Row } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
+import StripeCheckout from "react-stripe-checkout";
 import { CartState } from "../context/Context";
 import Rating from "./Rating";
 
 const Cart = () => {
+
+  const handleToken = (token, address) => {
+    console.log({ token, address })
+  }
+
   const {
     state: { cart },
     dispatch,
@@ -75,9 +81,22 @@ const Cart = () => {
       <div className="filters summary">
         <span className="title">Subtotal ({cart.length}) items</span>
         <span style={{ fontWeight: 700, fontSize: 20 }}>Total: ₹ {total}</span>
-        <Button type="button" disabled={cart.length === 0}>
+        {/* <Button type="button" disabled={cart.length === 0}>
           Proceed to Checkout
-        </Button>
+        </Button> */}
+        <StripeCheckout
+          stripeKey="pk_test_51KLSxUSIjn9sTY9drQSXmwev1rS8zXMc12lIrgsyuXGptBkGuw3jdE4lnairWjTKOAzpyuSSztb0vIrK5nkdBmxF00PuOqKU1P"
+          token={handleToken}
+          name="Pay With Card"
+          image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          label="Proceed to Checkout"
+          email="mohaperu@gmail.com"
+          amount={total*100}
+          currency="INR"
+          shippingAddress
+          billingAddress={false}
+        />
+        
       </div>
     </div>
   );
