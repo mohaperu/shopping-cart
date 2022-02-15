@@ -1,12 +1,25 @@
 import { Card, Button } from "react-bootstrap";
 import { CartState } from "../context/Context";
-import Rating from "./Rating";
+// import Rating from "./Rating";
+import { Rating } from 'react-simple-star-rating'
+import { useState } from "react";
+
 
 const SingleProduct = ({ prod }) => {
   const {
     state: { cart },
     dispatch,
   } = CartState();
+
+  const [rating, setRating] = useState(0) // initial rating value
+
+  const handleRating = (rate) => {
+    setRating(rate)
+  }
+
+  const handleReset = () => {
+    setRating(2.5)
+  }
 
   return (
     <div className="products">
@@ -21,7 +34,15 @@ const SingleProduct = ({ prod }) => {
             ) : (
               <div>4 days delivery</div>
             )}
-            <Rating rating={prod.ratings} />
+
+            {/* <Rating rating={prod.ratings} /> */}
+            <Rating
+              size="20px"
+              ratingValue={rating}
+              onClick={handleRating}
+              initialValue={2.5}
+            />
+
           </Card.Subtitle>
           {cart.some((p) => p.id === prod.id) ? (
             <Button
