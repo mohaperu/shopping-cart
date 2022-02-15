@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 const Login = () => {
 
   const [data, setData] = useState({
-    email: "",
-    password: ""
+    email: "test@gmail.com",
+    password: "Admin123@"
   });
 
   const handleChange = ({ currentTarget: input }) => {
